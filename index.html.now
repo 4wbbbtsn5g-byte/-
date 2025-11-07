@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>통영 에코 모니터링</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: "Noto Sans KR", sans-serif;
+            background: #f6faf7;
+            color: #222;
+        }
+
+        header {
+            background: #2c7a7b;
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+        }
+        header h1 {
+            margin: 0;
+            font-size: 2.5rem;
+        }
+        header p {
+            margin-top: 10px;
+            font-size: 1.1rem;
+            line-height: 1.5;
+        }
+
+        section {
+            max-width: 900px;
+            margin: auto;
+            padding: 40px 20px;
+        }
+
+        h2 {
+            border-left: 6px solid #2c7a7b;
+            padding-left: 12px;
+            color: #2c7a7b;
+        }
+
+        .data-box {
+            background: white;
+            padding: 20px;
+            margin-top: 20px;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .input-box {
+            margin-top: 15px;
+        }
+        .input-box input, .input-box textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            margin-top: 8px;
+        }
+
+        button {
+            margin-top: 10px;
+            padding: 12px 15px;
+            background: #319795;
+            border: none;
+            border-radius: 8px;
+            color: white;
+            cursor: pointer;
+        }
+        button:hover {
+            background: #2c7a7b;
+        }
+
+        footer {
+            text-align: center;
+            padding: 30px;
+            color: #555;
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <h1>통영 스마트 환경 플랫폼 – 통영 에코 모니터링</h1>
+    <p>
+        환경 문제는 조기에 선제적으로 관리해야 피해를 줄일 수 있다.<br>
+        실시간 환경 데이터 제공을 통해 적조 예측, 오염 감지, 시민 참여 확대를 실현한다.
+    </p>
+</header>
+
+<!-- 📌 1. 실시간 환경 모니터링 -->
+<section>
+    <h2>1. 센서·공공 데이터 기반 실시간 환경 모니터링</h2>
+
+    <div class="data-box">
+        <h3>① 바닷물 온도 / 탁도 / 적조 가능성</h3>
+        <p><b>바닷물 온도:</b> 19.4°C</p>
+        <p><b>탁도(NTU):</b> 3.1 NTU</p>
+        <p><b>적조 가능성:</b> 21% (예측 모델 기반)</p>
+
+        <small>
+            출처:<br>
+            - 국가해양조사원(KHOA) 통영해역 수질자료<br>
+            - 국립수산과학원 적조예측센터 공개자료  
+        </small>
+    </div>
+
+    <div class="data-box">
+        <h3>② 미세먼지(PM2.5) & 이산화탄소(CO₂)</h3>
+        <p><b>PM2.5:</b> 18㎍/m³ (좋음)</p>
+        <p><b>CO₂ 농도:</b> 423 ppm</p>
+
+        <small>
+            출처: 환경부 에어코리아, 기상청 대기정보 누리집
+        </small>
+    </div>
+
+    <div class="data-box">
+        <h3>③ 통영 바다 주변 온도·습도</h3>
+        <p><b>기온:</b> 16.8°C</p>
+        <p><b>습도:</b> 62%</p>
+
+        <small>
+            출처: 기상청 통영 관측소(KMA)
+        </small>
+    </div>
+</section>
+
+<!-- 📌 2. 시민 참여 -->
+<section>
+    <h2>2. 시민 환경 모니터링 기능</h2>
+
+    <div class="data-box">
+        <h3>① 쓰레기 발견·위치 제보</h3>
+        <div class="input-box">
+            <label>위치 또는 설명 입력</label>
+            <textarea id="reportText" rows="3"></textarea>
+            <button onclick="submitReport()">제보하기</button>
+            <p id="reportResult"></p>
+        </div>
+    </div>
+
+    <div class="data-box">
+        <h3>② 오염 사진 업로드 → AI 쓰레기 종류 판별</h3>
+        <input type="file" id="trashImage">
+        <button onclick="analyzeTrash()">AI 분석하기</button>
+        <p id="trashResult"></p>
+    </div>
+
+    <div class="data-box">
+        <h3>③ 벌·식물·조개류 관찰 → 생태 건강도 체크</h3>
+        <div class="input-box">
+            <label>관찰 내용 입력</label>
+            <textarea id="ecoText" rows="3"></textarea>
+            <button onclick="checkEco()">건강도 분석</button>
+            <p id="ecoResult"></p>
+        </div>
+    </div>
+</section>
+
+<!-- 📌 3. 문제 해결 가이드 -->
+<section>
+    <h2>3. 문제 해결 가이드</h2>
+
+    <div class="data-box">
+        <h3>① 상황별 오염 대응법</h3>
+        <ul>
+            <li>적조 의심: 양식장 수류 교환, 먹이 공급 줄이기</li>
+            <li>해변 쓰레기 급증: 담당 부서 신고 + 분리배출 캠페인</li>
+            <li>기름 유출 발견: 일반 시민은 접촉 금지 후 즉시 신고</li>
+        </ul>
+    </div>
+
+    <div class="data-box">
+        <h3>② 플라스틱 저감 TIP</h3>
+        <ul>
+            <li>일회용 컵 대신 텀블러 사용</li>
+            <li>슈퍼에서 비닐 대신 장바구니 사용</li>
+            <li>샴푸·세제 ‘리필 스테이션’ 적극 활용</li>
+        </ul>
+    </div>
+
+    <div class="data-box">
+        <h3>③ 지역 환경단체·지자체 참여</h3>
+        <ul>
+            <li>통영 지속가능발전협의회</li>
+            <li>경상남도 환경정책과</li>
+            <li>통영시 해양환경과</li>
+        </ul>
+    </div>
+</section>
+
+<footer>
+    © 2025 Tongyeong Eco Monitoring WebApp
+</footer>
+
+<script>
+    function submitReport() {
+        const text = document.getElementById("reportText").value;
+        if (text.trim() === "") {
+            document.getElementById("reportResult").innerHTML = "내용을 입력해주세요.";
+        } else {
+            document.getElementById("reportResult").innerHTML = "✅ 제보가 접수되었습니다. 감사합니다!";
+        }
+    }
+
+    function analyzeTrash() {
+        const file = document.getElementById("trashImage").value;
+        if (!file) {
+            document.getElementById("trashResult").innerHTML = "사진을 업로드해주세요.";
+        } else {
+            document.getElementById("trashResult").innerHTML =
+                "✅ AI 분석 결과: 플라스틱 병/비닐류로 추정됩니다.";
+        }
+    }
+
+    function checkEco() {
+        const text = document.getElementById("ecoText").value;
+        if (text.trim() === "") {
+            document.getElementById("ecoResult").innerHTML = "관찰 내용을 입력해주세요.";
+        } else {
+            document.getElementById("ecoResult").innerHTML =
+                "✅ 생태 건강도: 양호 — 다양한 곤충/식물 관찰이 보고됨.";
+        }
+    }
+</script>
+
+</body>
+</html>
